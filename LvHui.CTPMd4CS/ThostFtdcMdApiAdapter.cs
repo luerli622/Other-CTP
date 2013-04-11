@@ -31,28 +31,28 @@ namespace LvHui.CTPMd4CS
 
     class ThostFtdcMdApiAdapter
     {
-        [DllImport("CTPMd4C.dll", EntryPoint = "_CreateFtdcMdApi@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_CreateFtdcMdApi@8", CallingConvention = CallingConvention.StdCall)]
         public static extern IntPtr CreateFtdcMdApi(String pszFlowPath = "", bool bIsUsingUdp = false);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_Release@4", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_Release@4", CallingConvention = CallingConvention.StdCall)]
         public static extern void Release(IntPtr pMdApi);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_Init@4", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_Init@4", CallingConvention = CallingConvention.StdCall)]
         public static extern void Init(IntPtr pMdApi);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_Join@4", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_Join@4", CallingConvention = CallingConvention.StdCall)]
         public static extern int Join(IntPtr pMdApi);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_GetTradingDay@4", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_GetTradingDay@4", CallingConvention = CallingConvention.StdCall)]
         public static extern string GetTradingDay(IntPtr pMdApi);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_RegisterFront@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_RegisterFront@8", CallingConvention = CallingConvention.StdCall)]
         public static extern void RegisterFront(IntPtr pMdApi, string pszFrontAddress);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_RegisterNameServer@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_RegisterNameServer@8", CallingConvention = CallingConvention.StdCall)]
         public static extern void RegisterNameServer(IntPtr pMdApi, string pszNsAddress);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_RegisterFunc@40", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_RegisterFunc@40", CallingConvention = CallingConvention.StdCall)]
         public static extern void RegisterFunc(IntPtr pMdApi,
         OnFrontConnected pfOnFrontConnected, OnFrontDisconnected pfOnFrontDisconnected,
         OnHeartBeatWarning pfOnHeartBeatWarning, OnRspUserLogin pfOnRspUserLogin,
@@ -60,16 +60,16 @@ namespace LvHui.CTPMd4CS
         OnRspSubMarketData pfOnRspSubMarketData, OnRspUnSubMarketData pfOnRspUnSubMarketData,
         OnRtnDepthMarketData pfOnRtnDepthMarketData);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_SubscribeMarketData@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_SubscribeMarketData@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int SubscribeMarketData(IntPtr pMdApi, string[] ppInstrumentID, int nCount);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_UnSubscribeMarketData@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_UnSubscribeMarketData@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int UnSubscribeMarketData(IntPtr pMdApi, string[] ppInstrumentID, int nCount);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_ReqUserLogin@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_ReqUserLogin@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqUserLogin(IntPtr pMdApi, ref CThostFtdcReqUserLoginField pReqUserLoginField, int nRequestID);
 
-        [DllImport("CTPMd4C.dll", EntryPoint = "_ReqUserLogout@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPMd4C.dll", EntryPoint = "_ReqUserLogout@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqUserLogout(IntPtr pMdApi, ref CThostFtdcUserLogoutField pUserLogout, int nRequestID);
     }
 }

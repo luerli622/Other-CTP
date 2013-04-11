@@ -141,12 +141,22 @@ namespace LvHui.CTPMd4CS
         ///@param pSpi 派生自回调接口类的实例
         public void RegisterSpi(ref CThostFtdcMdSpi pSpi)
         {
+            m_OnFrontConnected = pSpi.OnFrontConnected;
+            m_OnFrontDisconnected = pSpi.OnFrontDisconnected;
+            m_OnHeartBeatWarning = pSpi.OnHeartBeatWarning;
+            m_OnRspUserLogin = pSpi.OnRspUserLogin;
+            m_OnRspUserLogout = pSpi.OnRspUserLogout;
+            m_OnRspError = pSpi.OnRspError;
+            m_OnRspSubMarketData = pSpi.OnRspSubMarketData;
+            m_OnRspUnSubMarketData = pSpi.OnRspUnSubMarketData;
+            m_OnRtnDepthMarketData = pSpi.OnRtnDepthMarketData;
+
             ThostFtdcMdApiAdapter.RegisterFunc(pMdApi,
-                pSpi.OnFrontConnected, pSpi.OnFrontDisconnected,
-                pSpi.OnHeartBeatWarning, pSpi.OnRspUserLogin,
-                pSpi.OnRspUserLogout, pSpi.OnRspError,
-                pSpi.OnRspSubMarketData, pSpi.OnRspUnSubMarketData,
-                pSpi.OnRtnDepthMarketData);
+                m_OnFrontConnected, m_OnFrontDisconnected,
+                m_OnHeartBeatWarning, m_OnRspUserLogin,
+                m_OnRspUserLogout, m_OnRspError,
+                m_OnRspSubMarketData, m_OnRspUnSubMarketData,
+                m_OnRtnDepthMarketData);
         }
 
         ///订阅行情。
@@ -185,76 +195,87 @@ namespace LvHui.CTPMd4CS
 
         private static CThostFtdcMdApi self = new CThostFtdcMdApi();
         private static object obj = new object();
+
+        private OnFrontConnected m_OnFrontConnected;
+        private OnFrontDisconnected m_OnFrontDisconnected;
+        private OnHeartBeatWarning m_OnHeartBeatWarning;
+        private OnRspUserLogin m_OnRspUserLogin;
+        private OnRspUserLogout m_OnRspUserLogout;
+        private OnRspError m_OnRspError;
+        private OnRspSubMarketData m_OnRspSubMarketData;
+        private OnRspUnSubMarketData m_OnRspUnSubMarketData;
+        private OnRtnDepthMarketData m_OnRtnDepthMarketData;
+
     }
 
-//     public class MySpi : CThostFtdcMdSpi
-//     {
-//         public override void OnFrontConnected()
-//         {            
-//         }
-// 
-//         public override void OnFrontDisconnected(int nReason)
-//         {
-//             throw new Exception("The method or operation is not implemented.");
-//         }
-// 
-//         public override void OnHeartBeatWarning(int nTimeLapse)
-//         {
-//             throw new Exception("The method or operation is not implemented.");
-//         }
-// 
-//         public override void OnRspUserLogin(ref CThostFtdcRspUserLoginField pRspUserLogin, ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
-//         {
-//         }
-// 
-//         public override void OnRspUserLogout(ref CThostFtdcUserLogoutField pUserLogout, ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
-//         {
-//             throw new Exception("The method or operation is not implemented.");
-//         }
-// 
-//         public override void OnRspError(ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
-//         {
-//             throw new Exception("The method or operation is not implemented.");
-//         }
-// 
-//         public override void OnRspSubMarketData(ref CThostFtdcSpecificInstrumentField pSpecificInstrument, ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
-//         {
-//             
-//         }
-// 
-//         public override void OnRspUnSubMarketData(ref CThostFtdcSpecificInstrumentField pSpecificInstrument, ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
-//         {
-//             throw new Exception("The method or operation is not implemented.");
-//         }
-// 
-//         public override void OnRtnDepthMarketData(ref CThostFtdcDepthMarketDataField pDepthMarketData)
-//         {
-//             System.Console.Write(pDepthMarketData.InstrumentID, pDepthMarketData.Volume, pDepthMarketData.UpdateTime);
-//             System.Console.Write(pDepthMarketData.Volume);
-//             System.Console.WriteLine(pDepthMarketData.UpdateTime);
-//         }
-//     }
-// 
-//     public class Test
-//     {
-//         public static void Main(string[] args)
-//         {
-//             CThostFtdcMdApi mdapi = CThostFtdcMdApi.CreateFtdcMdApi();
-//             CThostFtdcMdSpi pUserSpi = new MySpi();
-//             mdapi.RegisterSpi(ref pUserSpi);
-//             mdapi.RegisterFront("tcp://210.13.70.236:31213");        
-// 
-//             mdapi.Init();
-//             System.Threading.Thread.Sleep(2 * 1000);
-//             CThostFtdcReqUserLoginField ReqUserLoginField = new CThostFtdcReqUserLoginField();
-//             mdapi.ReqUserLogin(ref ReqUserLoginField, 1);
-//             
-//             string[] ifs = new string[2];
-//             ifs[0] = "IF1304";
-//             ifs[1] = "IF1305";
-//             mdapi.SubscribeMarketData(ifs, 2);
-// 
-//             mdapi.Join();
-//         }
-//     }
+    public class MySpi : CThostFtdcMdSpi
+    {
+        public override void OnFrontConnected()
+        {
+        }
+
+        public override void OnFrontDisconnected(int nReason)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override void OnHeartBeatWarning(int nTimeLapse)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override void OnRspUserLogin(ref CThostFtdcRspUserLoginField pRspUserLogin, ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
+        {
+        }
+
+        public override void OnRspUserLogout(ref CThostFtdcUserLogoutField pUserLogout, ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override void OnRspError(ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override void OnRspSubMarketData(ref CThostFtdcSpecificInstrumentField pSpecificInstrument, ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
+        {
+
+        }
+
+        public override void OnRspUnSubMarketData(ref CThostFtdcSpecificInstrumentField pSpecificInstrument, ref CThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public override void OnRtnDepthMarketData(ref CThostFtdcDepthMarketDataField pDepthMarketData)
+        {
+            System.Console.Write(pDepthMarketData.InstrumentID, pDepthMarketData.Volume, pDepthMarketData.UpdateTime);
+            System.Console.Write(pDepthMarketData.Volume);
+            System.Console.WriteLine(pDepthMarketData.UpdateTime);
+        }
+    }
+
+    public class Test
+    {
+        public static void Main(string[] args)
+        {
+            CThostFtdcMdApi mdapi = CThostFtdcMdApi.CreateFtdcMdApi();
+            CThostFtdcMdSpi pUserSpi = new MySpi();
+            mdapi.RegisterSpi(ref pUserSpi);
+            mdapi.RegisterFront("tcp://210.13.70.236:31213");
+
+            mdapi.Init();
+            System.Threading.Thread.Sleep(2 * 1000);
+            CThostFtdcReqUserLoginField ReqUserLoginField = new CThostFtdcReqUserLoginField();
+            mdapi.ReqUserLogin(ref ReqUserLoginField, 1);
+
+            string[] ifs = new string[2];
+            ifs[0] = "IF1304";
+            ifs[1] = "IF1305";
+            mdapi.SubscribeMarketData(ifs, 2);
+
+            mdapi.Join();
+        }
+    }
 }

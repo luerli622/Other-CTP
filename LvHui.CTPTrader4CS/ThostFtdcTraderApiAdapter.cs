@@ -486,35 +486,35 @@ namespace LvHui.CTPTrader4CS
         ///@param pszFlowPath 存贮订阅信息文件的目录，默认为当前目录
         ///@return 创建出的UserApi
         //modify for udp marketdata
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_CreateFtdcTraderApi@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_CreateFtdcTraderApi@8", CallingConvention = CallingConvention.StdCall)]
         public static extern IntPtr CreateFtdcTraderApi(string pszFlowPath, bool bIsUsingUdp);
 
         ///删除接口对象本身
         ///@remark 不再使用本接口对象时,调用该函数删除接口对象
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_Release@4", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_Release@4", CallingConvention = CallingConvention.StdCall)]
         public static extern void Release(IntPtr pTraderApi);
 
         ///初始化
         ///@remark 初始化运行环境,只有调用后,接口才开始工作
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_Init@4", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_Init@4", CallingConvention = CallingConvention.StdCall)]
         public static extern void Init(IntPtr pTraderApi);
 
         ///等待接口线程结束运行
         ///@return 线程退出代码
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_Join@4", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_Join@4", CallingConvention = CallingConvention.StdCall)]
         public static extern int Join(IntPtr pTraderApi);
 
         ///获取当前交易日
         ///@retrun 获取到的交易日
         ///@remark 只有登录成功后,才能得到正确的交易日
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_GetTradingDay@4", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_GetTradingDay@4", CallingConvention = CallingConvention.StdCall)]
         public static extern string GetTradingDay(IntPtr pTraderApi);
 
         ///注册前置机网络地址
         ///@param pszFrontAddress：前置机网络地址。
         ///@remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:17001”。 
         ///@remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”17001”代表服务器端口号。
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_RegisterFront@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_RegisterFront@8", CallingConvention = CallingConvention.StdCall)]
         public static extern void RegisterFront(IntPtr pTraderApi, string pszFrontAddress);
 
         ///注册名字服务器网络地址
@@ -522,12 +522,12 @@ namespace LvHui.CTPTrader4CS
         ///@remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:12001”。 
         ///@remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”12001”代表服务器端口号。
         ///@remark RegisterNameServer优先于RegisterFront
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_RegisterNameServer@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_RegisterNameServer@8", CallingConvention = CallingConvention.StdCall)]
         public static extern void RegisterNameServer(IntPtr pTraderApi, string pszNsAddress);
 
         ///注册回调接口
         ///@param pSpi 派生自回调接口类的实例
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_RegisterSpi@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_RegisterSpi@8", CallingConvention = CallingConvention.StdCall)]
         public static extern void RegisterSpi(IntPtr pTraderApi, ref STraderSpi pSpi);
 
         ///订阅私有流。
@@ -536,7 +536,7 @@ namespace LvHui.CTPTrader4CS
         ///        THOST_TERT_RESUME:从上次收到的续传
         ///        THOST_TERT_QUICK:只传送登录后私有流的内容
         ///@remark 该方法要在Init方法前调用。若不调用则不会收到私有流的数据。
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_SubscribePrivateTopic@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_SubscribePrivateTopic@8", CallingConvention = CallingConvention.StdCall)]
         public static extern void SubscribePrivateTopic(IntPtr pTraderApi, THOST_TE_RESUME_TYPE nResumeType);
 
         ///订阅公共流。
@@ -545,180 +545,180 @@ namespace LvHui.CTPTrader4CS
         ///        THOST_TERT_RESUME:从上次收到的续传
         ///        THOST_TERT_QUICK:只传送登录后公共流的内容
         ///@remark 该方法要在Init方法前调用。若不调用则不会收到公共流的数据。
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_SubscribePublicTopic@8", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_SubscribePublicTopic@8", CallingConvention = CallingConvention.StdCall)]
         public static extern void SubscribePublicTopic(IntPtr pTraderApi, THOST_TE_RESUME_TYPE nResumeType);
 
         ///客户端认证请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqAuthenticate@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqAuthenticate@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqAuthenticate(IntPtr pTraderApi, ref CThostFtdcReqAuthenticateField pReqAuthenticateField, int nRequestID);
 
         ///用户登录请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqUserLogin@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqUserLogin@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqUserLogin(IntPtr pTraderApi, ref CThostFtdcReqUserLoginField pReqUserLoginField, int nRequestID);
 
 
         ///登出请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqUserLogout@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqUserLogout@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqUserLogout(IntPtr pTraderApi, ref CThostFtdcUserLogoutField pUserLogout, int nRequestID);
 
         ///用户口令更新请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqUserPasswordUpdate@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqUserPasswordUpdate@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqUserPasswordUpdate(IntPtr pTraderApi, ref CThostFtdcUserPasswordUpdateField pUserPasswordUpdate, int nRequestID);
 
         ///资金账户口令更新请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqTradingAccountPasswordUpdate@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqTradingAccountPasswordUpdate@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqTradingAccountPasswordUpdate(IntPtr pTraderApi, ref CThostFtdcTradingAccountPasswordUpdateField pTradingAccountPasswordUpdate, int nRequestID);
 
         ///报单录入请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqOrderInsert@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqOrderInsert@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqOrderInsert(IntPtr pTraderApi, ref CThostFtdcInputOrderField pInputOrder, int nRequestID);
 
         ///预埋单录入请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqParkedOrderInsert@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqParkedOrderInsert@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqParkedOrderInsert(IntPtr pTraderApi, ref CThostFtdcParkedOrderField pParkedOrder, int nRequestID);
 
         ///预埋撤单录入请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqParkedOrderAction@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqParkedOrderAction@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqParkedOrderAction(IntPtr pTraderApi, ref CThostFtdcParkedOrderActionField pParkedOrderAction, int nRequestID);
 
         ///报单操作请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqOrderAction@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqOrderAction@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqOrderAction(IntPtr pTraderApi, ref CThostFtdcInputOrderActionField pInputOrderAction, int nRequestID);
 
         ///查询最大报单数量请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQueryMaxOrderVolume@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQueryMaxOrderVolume@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQueryMaxOrderVolume(IntPtr pTraderApi, ref CThostFtdcQueryMaxOrderVolumeField pQueryMaxOrderVolume, int nRequestID);
 
         ///投资者结算结果确认
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqSettlementInfoConfirm@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqSettlementInfoConfirm@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqSettlementInfoConfirm(IntPtr pTraderApi, ref CThostFtdcSettlementInfoConfirmField pSettlementInfoConfirm, int nRequestID);
 
         ///请求删除预埋单
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqRemoveParkedOrder@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqRemoveParkedOrder@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqRemoveParkedOrder(IntPtr pTraderApi, ref CThostFtdcRemoveParkedOrderField pRemoveParkedOrder, int nRequestID);
 
         ///请求删除预埋撤单
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqRemoveParkedOrderAction@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqRemoveParkedOrderAction@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqRemoveParkedOrderAction(IntPtr pTraderApi, ref CThostFtdcRemoveParkedOrderActionField pRemoveParkedOrderAction, int nRequestID);
 
         ///请求查询报单
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryOrder@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryOrder@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryOrder(IntPtr pTraderApi, ref CThostFtdcQryOrderField pQryOrder, int nRequestID);
 
         ///请求查询成交
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryTrade@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryTrade@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryTrade(IntPtr pTraderApi, ref CThostFtdcQryTradeField pQryTrade, int nRequestID);
 
         ///请求查询投资者持仓
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryInvestorPosition@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryInvestorPosition@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryInvestorPosition(IntPtr pTraderApi, ref CThostFtdcQryInvestorPositionField pQryInvestorPosition, int nRequestID);
 
         ///请求查询资金账户
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryTradingAccount@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryTradingAccount@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryTradingAccount(IntPtr pTraderApi, ref CThostFtdcQryTradingAccountField pQryTradingAccount, int nRequestID);
 
         ///请求查询投资者
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryInvestor@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryInvestor@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryInvestor(IntPtr pTraderApi, ref CThostFtdcQryInvestorField pQryInvestor, int nRequestID);
 
         ///请求查询交易编码
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryTradingCode@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryTradingCode@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryTradingCode(IntPtr pTraderApi, ref CThostFtdcQryTradingCodeField pQryTradingCode, int nRequestID);
 
         ///请求查询合约保证金率
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryInstrumentMarginRate@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryInstrumentMarginRate@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryInstrumentMarginRate(IntPtr pTraderApi, ref CThostFtdcQryInstrumentMarginRateField pQryInstrumentMarginRate, int nRequestID);
 
         ///请求查询合约手续费率
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryInstrumentCommissionRate@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryInstrumentCommissionRate@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryInstrumentCommissionRate(IntPtr pTraderApi, ref CThostFtdcQryInstrumentCommissionRateField pQryInstrumentCommissionRate, int nRequestID);
 
         ///请求查询交易所
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryExchange@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryExchange@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryExchange(IntPtr pTraderApi, ref CThostFtdcQryExchangeField pQryExchange, int nRequestID);
 
         ///请求查询合约
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryInstrument@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryInstrument@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryInstrument(IntPtr pTraderApi, ref CThostFtdcQryInstrumentField pQryInstrument, int nRequestID);
 
         ///请求查询行情
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryDepthMarketData@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryDepthMarketData@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryDepthMarketData(IntPtr pTraderApi, ref CThostFtdcQryDepthMarketDataField pQryDepthMarketData, int nRequestID);
 
         ///请求查询投资者结算结果
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQrySettlementInfo@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQrySettlementInfo@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQrySettlementInfo(IntPtr pTraderApi, ref CThostFtdcQrySettlementInfoField pQrySettlementInfo, int nRequestID);
 
         ///请求查询转帐银行
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryTransferBank@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryTransferBank@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryTransferBank(IntPtr pTraderApi, ref CThostFtdcQryTransferBankField pQryTransferBank, int nRequestID);
 
         ///请求查询投资者持仓明细
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryInvestorPositionDetail@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryInvestorPositionDetail@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryInvestorPositionDetail(IntPtr pTraderApi, ref CThostFtdcQryInvestorPositionDetailField pQryInvestorPositionDetail, int nRequestID);
 
         ///请求查询客户通知
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryNotice@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryNotice@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryNotice(IntPtr pTraderApi, ref CThostFtdcQryNoticeField pQryNotice, int nRequestID);
 
         ///请求查询结算信息确认
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQrySettlementInfoConfirm@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQrySettlementInfoConfirm@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQrySettlementInfoConfirm(IntPtr pTraderApi, ref CThostFtdcQrySettlementInfoConfirmField pQrySettlementInfoConfirm, int nRequestID);
 
         ///请求查询投资者持仓明细
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryInvestorPositionCombineDetail@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryInvestorPositionCombineDetail@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryInvestorPositionCombineDetail(IntPtr pTraderApi, ref CThostFtdcQryInvestorPositionCombineDetailField pQryInvestorPositionCombineDetail, int nRequestID);
 
         ///请求查询保证金监管系统经纪公司资金账户密钥
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryCFMMCTradingAccountKey@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryCFMMCTradingAccountKey@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryCFMMCTradingAccountKey(IntPtr pTraderApi, ref CThostFtdcQryCFMMCTradingAccountKeyField pQryCFMMCTradingAccountKey, int nRequestID);
 
         ///请求查询仓单折抵信息
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryEWarrantOffset@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryEWarrantOffset@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryEWarrantOffset(IntPtr pTraderApi, ref CThostFtdcQryEWarrantOffsetField pQryEWarrantOffset, int nRequestID);
 
         ///请求查询转帐流水
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryTransferSerial@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryTransferSerial@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryTransferSerial(IntPtr pTraderApi, ref CThostFtdcQryTransferSerialField pQryTransferSerial, int nRequestID);
 
         ///请求查询银期签约关系
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryAccountregister@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryAccountregister@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryAccountregister(IntPtr pTraderApi, ref CThostFtdcQryAccountregisterField pQryAccountregister, int nRequestID);
 
         ///请求查询签约银行
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryContractBank@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryContractBank@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryContractBank(IntPtr pTraderApi, ref CThostFtdcQryContractBankField pQryContractBank, int nRequestID);
 
         ///请求查询预埋单
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryParkedOrder@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryParkedOrder@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryParkedOrder(IntPtr pTraderApi, ref CThostFtdcQryParkedOrderField pQryParkedOrder, int nRequestID);
 
         ///请求查询预埋撤单
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryParkedOrderAction@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryParkedOrderAction@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryParkedOrderAction(IntPtr pTraderApi, ref CThostFtdcQryParkedOrderActionField pQryParkedOrderAction, int nRequestID);
 
         ///请求查询交易通知
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryTradingNotice@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryTradingNotice@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryTradingNotice(IntPtr pTraderApi, ref CThostFtdcQryTradingNoticeField pQryTradingNotice, int nRequestID);
 
         ///请求查询经纪公司交易参数
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryBrokerTradingParams@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryBrokerTradingParams@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryBrokerTradingParams(IntPtr pTraderApi, ref CThostFtdcQryBrokerTradingParamsField pQryBrokerTradingParams, int nRequestID);
 
         ///请求查询经纪公司交易算法
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQryBrokerTradingAlgos@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQryBrokerTradingAlgos@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQryBrokerTradingAlgos(IntPtr pTraderApi, ref CThostFtdcQryBrokerTradingAlgosField pQryBrokerTradingAlgos, int nRequestID);
 
         ///期货发起银行资金转期货请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqFromBankToFutureByFuture@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqFromBankToFutureByFuture@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqFromBankToFutureByFuture(IntPtr pTraderApi, ref CThostFtdcReqTransferField pReqTransfer, int nRequestID);
 
         ///期货发起期货资金转银行请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqFromFutureToBankByFuture@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqFromFutureToBankByFuture@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqFromFutureToBankByFuture(IntPtr pTraderApi, ref CThostFtdcReqTransferField pReqTransfer, int nRequestID);
 
         ///期货发起查询银行余额请求
-        [DllImport("CTPTrader4C.dll", EntryPoint = "_ReqQueryBankAccountMoneyByFuture@12", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("LvHui.CTPTrader4C.dll", EntryPoint = "_ReqQueryBankAccountMoneyByFuture@12", CallingConvention = CallingConvention.StdCall)]
         public static extern int ReqQueryBankAccountMoneyByFuture(IntPtr pTraderApi, ref CThostFtdcReqQueryAccountField pReqQueryAccount, int nRequestID);
     }
 }
