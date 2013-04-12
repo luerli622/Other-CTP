@@ -58,34 +58,15 @@ namespace LvHui.CTPMd4CS
 
     public class CThostFtdcMdApi
     {
-
-        //MdApi是否创建成功
-        public bool IsCreated
-        {
-            get { return bIsCreated; }
-        }
-
         ///创建MdApi
         ///@param pszFlowPath 存贮订阅信息文件的目录，默认为当前目录
         ///@return 创建出的UserApi
         ///modify for udp marketdata
         public static CThostFtdcMdApi CreateFtdcMdApi(string pszFlowPath = "", bool bIsUsingUdp = false)
         {
-            if (!self.bIsCreated)
-            {
-                lock (obj)
-                {
-                    if (!self.bIsCreated)
-                    {
-                        self.pMdApi = ThostFtdcMdApiAdapter.CreateFtdcMdApi(pszFlowPath, bIsUsingUdp);
-                        if (self.pMdApi != null && self.pMdApi != IntPtr.Zero)
-                        {
-                            self.bIsCreated = true;
-                        }
-                    }
-                }
-            }
-            return self;
+            CThostFtdcMdApi Api = new CThostFtdcMdApi();
+            Api.pMdApi = ThostFtdcMdApiAdapter.CreateFtdcMdApi(pszFlowPath, bIsUsingUdp);                        
+            return Api;
         }
 
         ///删除接口对象本身
@@ -189,11 +170,11 @@ namespace LvHui.CTPMd4CS
             return ThostFtdcMdApiAdapter.ReqUserLogout(pMdApi, ref pUserLogout, nRequestID);
         }
 
-        private bool bIsCreated = false;
+        
         private IntPtr pMdApi = IntPtr.Zero;
         private CThostFtdcMdApi() { }
 
-        private static CThostFtdcMdApi self = new CThostFtdcMdApi();
+       
         private static object obj = new object();
 
         private OnFrontConnected m_OnFrontConnected;

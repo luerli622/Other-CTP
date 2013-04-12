@@ -251,33 +251,15 @@ namespace LvHui.CTPTrader4CS
 
     public class CThostFtdcTraderApi
     {
-        //TraderApi是否创建成功
-        public bool IsCreated
-        {
-            get { return bIsCreated; }
-        }
-
         ///创建TraderApi
         ///@param pszFlowPath 存贮订阅信息文件的目录，默认为当前目录
         ///@return 创建出的UserApi
         //modify for udp marketdata
         public static CThostFtdcTraderApi CreateFtdcTraderApi(string pszFlowPath = "", bool bIsUsingUdp = false)
         {
-            if (!self.bIsCreated)
-            {
-                lock (obj)
-                {
-                    if (!self.bIsCreated)
-                    {
-                        self.pTraderApi = ThostFtdcTraderApiAdapter.CreateFtdcTraderApi(pszFlowPath, bIsUsingUdp);
-                        if (self.pTraderApi != null && self.pTraderApi != IntPtr.Zero)
-                        {
-                            self.bIsCreated = true;
-                        }
-                    }
-                }
-            }
-            return self;
+            CThostFtdcTraderApi Api = new CThostFtdcTraderApi();
+            Api.pTraderApi = ThostFtdcTraderApiAdapter.CreateFtdcTraderApi(pszFlowPath, bIsUsingUdp);      
+            return Api;
         }
 
         ///删除接口对象本身
@@ -690,11 +672,11 @@ namespace LvHui.CTPTrader4CS
             return ThostFtdcTraderApiAdapter.ReqQueryBankAccountMoneyByFuture(pTraderApi, ref pReqQueryAccount, nRequestID);
         }
 
-        private bool bIsCreated = false;
+        
         private IntPtr pTraderApi = IntPtr.Zero;
         private CThostFtdcTraderApi() { }
 
-        private static CThostFtdcTraderApi self = new CThostFtdcTraderApi();
+        
         private static object obj = new object();
 
         STraderSpi m_Spi = new STraderSpi();
